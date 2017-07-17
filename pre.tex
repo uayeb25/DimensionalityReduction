@@ -1,0 +1,210 @@
+\documentclass[10pt]{beamer}
+\usetheme[
+%%% option passed to the outer theme
+%    progressstyle=fixedCircCnt,   % fixedCircCnt, movingCircCnt (moving is deault)
+  ]{Feather}
+  
+% If you want to change the colors of the various elements in the theme, edit and uncomment the following lines
+
+% Change the bar colors:
+%\setbeamercolor{Feather}{fg=red!20,bg=red}
+
+% Change the color of the structural elements:
+%\setbeamercolor{structure}{fg=red}
+
+% Change the frame title text color:
+%\setbeamercolor{frametitle}{fg=blue}
+
+% Change the normal text color background:
+%\setbeamercolor{normal text}{fg=black,bg=gray!10}
+
+%-------------------------------------------------------
+% INCLUDE PACKAGES
+%-------------------------------------------------------
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{helvet}
+
+%-------------------------------------------------------
+% DEFFINING AND REDEFINING COMMANDS
+%-------------------------------------------------------
+
+% colored hyperlinks
+\newcommand{\chref}[2]{
+  \href{#1}{{\usebeamercolor[bg]{Feather}#2}}
+}
+
+%-------------------------------------------------------
+% INFORMATION IN THE TITLE PAGE
+%-------------------------------------------------------
+
+\title[] % [] is optional - is placed on the bottom of the sidebar on every slide
+{ % is placed on the title page
+      \textbf{Sistemas de Recomendación}
+}
+
+\subtitle[Sistemas de Recomendación]
+{
+      \textbf{v. 1.0.0}
+}
+
+\author[Uayeb Caballero]
+{      Uayeb Caballero \\
+      {\ttfamily uayeb.caballero@gmail.com}
+}
+
+\institute[]
+{
+      Universidad Nacional Autonoma de Honduras
+  
+  %there must be an empty line above this line - otherwise some unwanted space is added between the university and the country (I do not know why;( )
+}
+
+\date{\today}
+
+%-------------------------------------------------------
+% THE BODY OF THE PRESENTATION
+%-------------------------------------------------------
+
+\begin{document}
+
+%-------------------------------------------------------
+% THE TITLEPAGE
+%-------------------------------------------------------
+
+{\1% % this is the name of the PDF file for the background
+\begin{frame}[plain,noframenumbering] % the plain option removes the header from the title page, noframenumbering removes the numbering of this frame only
+  \titlepage % call the title page information from above
+\end{frame}}
+
+%-------------------------------------------------------
+\section{Introduction}
+%-------------------------------------------------------
+
+\begin{frame}{Introduction}
+%-------------------------------------------------------
+Los sistemas de recomendaciones son herramientas que generan recomendaciones sobre un determinado objeto de estudio, 
+a partir de las preferencias y opiniones dadas por los usuarios. El uso de estos sistemas se está poniendo cada vez más de
+moda en Internet debido a que son muy útiles para evaluar y filtrar la gran cantidad de información disponible en la
+Web con objeto de asistir a los usuarios en sus procesos de búsqueda y recuperación de información. 
+En este trabajo realizaremos una revisión de las características y aspectos fundamentales relacionados con el diseño, 
+implementación y estructura de los sistemas de recomendaciones analizando distintas propuestas que han ido apareciendo 
+en la literatura al respecto.
+\end{frame}
+
+
+%-------------------------------------------------------
+\section{Collaborative Filtering}
+%-------------------------------------------------------
+
+\begin{frame}{Collaborative Filtering}
+%-------------------------------------------------------
+El Filtrado colaborativo (FC) es una técnica utilizada por algunos sistemas recomendadores. En general,
+el filtrado colaborativo es el proceso de filtrado de información o modelos, que usa técnicas que implican 
+la colaboración entre múltiples agentes, fuentes de datos, etc.  Las aplicaciones del filtrado colaborativo 
+suelen incluir conjuntos de datos muy grandes. Los métodos de filtrado colaborativo se han aplicado a muchos 
+tipos de datos, incluyendo la detección y control de datos (como en la exploración mineral, sensores 
+ambientales en áreas grandes o sensores múltiples, datos financieros) tales como instituciones de 
+servicios financieros que integran diversas fuentes financieras, o en formato de comercio electrónico y 
+aplicaciones web 2.0 donde el foco está en los datos del usuario, etc. Esta discusión se centra en el 
+filtrado colaborativo para datos de usuario, aunque algunos de los métodos y enfoques pueden 
+aplicarse a otras aplicaciones.
+
+
+\end{frame}
+
+
+%-------------------------------------------------------
+\section{Índice Jaccard}
+%-------------------------------------------------------
+
+\begin{frame}{Índice Jaccard}
+%-------------------------------------------------------
+El índice de Jaccard ( IJ ) o coeficiente de Jaccard ( IJ ) mide el grado de similitud entre dos conjuntos, sea cual sea el tipo de elementos.
+$\newline$
+La formulación es la siguiente:
+$\newline$
+J(A,B) = |A ${\cap}$ B| / |A ${\cup}$ B|
+
+\end{frame}
+
+
+%-------------------------------------------------------
+\section{Basado en memoria}
+%-------------------------------------------------------
+
+\begin{frame}{Basado en memoria}
+%-------------------------------------------------------
+Este mecanismo utiliza los datos de las evaluaciones de los usuarios para calcular la similitud entre los usuarios o 
+elementos. Esto se utiliza para hacer recomendaciones. Este fue de los primeros mecanismos y se usa en muchos 
+sistemas comerciales.
+
+${\displaystyle \operatorname {sim} (x,y)=\cos({\vec {x}},{\vec {y}})={\frac {{\vec {x}}\cdot {\vec {y}}}{||{\vec {x}}||\times ||{\vec {y}}||}}={\frac {\sum \limits _{i\in I_{xy}}r_{x,i}r_{y,i}}{{\sqrt {\sum \limits _{i\in I_{x}}r_{x,i}^{2}}}{\sqrt {\sum \limits _{i\in I_{y}}r_{y,i}^{2}}}}}}$
+
+\end{frame}
+
+
+%-------------------------------------------------------
+\section{Reducción de Dimensiones}
+%-------------------------------------------------------
+
+\begin{frame}{Reducción de Dimensiones}
+%-------------------------------------------------------
+Para conjuntos de datos de alta dimensión (es decir, con número de dimensiones más de 10), reducción de la dimensión 
+se realiza generalmente antes de la aplicación de un K-vecinos más cercanos (k-NN) con el fin de evitar los 
+efectos de la maldición de la dimensionalidad. 
+$\newline$
+Extracción de características y la reducción de la dimensión se puede combinar en un solo paso utilizando 
+análisis de componentes principales (PCA), análisis discriminante lineal (LDA), o análisis de la correlación 
+canónica (CCA) técnicas como un paso pre-procesamiento seguido por la agrupación de K-NN en vectores de 
+características en el espacio reducido dimensión. En aprendizaje automático este proceso de pocas dimensiones 
+también se llama incrustar.
+\end{frame}
+
+
+%-------------------------------------------------------
+\section{Descomposición en valores singulares}
+%-------------------------------------------------------
+
+\begin{frame}{Descomposición en valores singulares}
+%-------------------------------------------------------
+En álgebra lineal, la descomposición en valores singulares de una matriz real o compleja es una factorización de 
+la misma con muchas aplicaciones en estadística y otras disciplinas.
+
+Dada una matriz real ${\displaystyle A\in \Re ^{m\times n}}$, los autovalores de la matriz cuadrada, 
+simétrica y semidefinida positiva ${\displaystyle A^{T}A\in \Re ^{n\times n}}$ son siempre reales y mayores o iguales a cero. 
+Teniendo en cuenta el producto interno canónico vemos que:
+
+$\newline$
+
+${\displaystyle \left(A^{T}A\right)^{T}=A^{T}\left(A^{T}\right)^{T}=A^{T}A}$. O sea que es simétrica
+$\newline$
+${\displaystyle (Ax,Ax)=x^{T}A^{T}Ax=||Ax||^{2}\geq 0}$ es decir ${\displaystyle A^{T}A\,}$ es semidefinida positiva, 
+es decir, todos sus autovalores son mayores o iguales a cero.
+$\newline$
+
+Si ${\displaystyle \lambda _{i}\,}$  es el i-ésimo autovalor asociado al i-ésimo autovector, 
+entonces ${\displaystyle \lambda _{i}\in \Re }$. Esto es una propiedad de las matrices simétricas.
+\end{frame}
+
+
+%-------------------------------------------------------
+\section{Conclusión}
+%-------------------------------------------------------
+
+\begin{frame}{Conclusión}
+%-------------------------------------------------------
+La cantidad de algoritmos para construir sistemas de recomendacion son incontables, hoy en dia con el constante crecimiento de Internet
+y con las distintas necesidades para retener los usuarios, los recommendation engines deben de ser mas precisos hasta el punto de 
+dar la experiencia de personalizacion por usuario. tener este tipo de paradigmas hace que el costo computacional sea elevado en el 
+caso de querer implementar tecnicas en base a filtros colaborativos, por lo que para datasets pequeños se recomienda su uso. lo bueno
+de este tipo de tecnicas es que su interpretabilidad es mas rapida. para el caso de datasets muy grandes se recomiendan tecnicas que involucran 
+reduccion de dimensiones como el caso de Descomposicion Espectral, SVD o ACP. Estos por su tecnica son mas rapidos de procesar
+pero mas dificiles de interpretar. 
+\end{frame}
+
+
+
+\end{document}

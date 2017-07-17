@@ -19,7 +19,7 @@
 %	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
 %----------------------------------------------------------------------------------------
 
-\documentclass[10pt, a4paper, twocolumn]{article} % 10pt font size (11 and 12 also possible), A4 paper (letterpaper for US letter) and two column layout (remove for one column)
+\documentclass[12pt, a4paper]{article} % 10pt font size (11 and 12 also possible), A4 paper (letterpaper for US letter) and two column layout (remove for one column)
 
 \input{structure.tex} % Specifies the document structure and loads requires packages
 
@@ -27,14 +27,12 @@
 %	ARTICLE INFORMATION
 %----------------------------------------------------------------------------------------
 
-\title{Effective Methods for Capturing Cattle Rustlers} % The article title
+\title{Sistemas de Recomendación} % The article title
 
 \author{
-	\authorstyle{John Marston\textsuperscript{1,2,3} and Bonnie MacFarlane\textsuperscript{2,3}} % Authors
+	\authorstyle{Uayeb Caballero Rodríguez} % Authors
 	\newline\newline % Space before institutions
-	\textsuperscript{1}\institution{Universidad Nacional Autónoma de México, Mexico City, Mexico}\\ % Institution 1
-	\textsuperscript{2}\institution{University of Texas at Austin, Texas, United States of America}\\ % Institution 2
-	\textsuperscript{3}\institution{\texttt{LaTeXTemplates.com}} % Institution 3
+	\institution{Universidad Nacional Autónoma de Honduras, Ciudad Universitaria, Honduras}\ % Institution 1	
 }
 
 % Example of a one line author/institution relationship
@@ -43,8 +41,21 @@
 \date{\today} % Add a date here if you would like one to appear underneath the title block, use \today for the current date, leave empty for no date
 
 %----------------------------------------------------------------------------------------
+\usepackage{cite}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{listings}
+
+
+
 
 \begin{document}
+
+\tableofcontents
+
+\addtocontents{toc}{\hspace{-7.5mm} \textbf{Capítulos}}
+\addtocontents{toc}{\hfill \textbf{Página} \par}
+\addtocontents{toc}{\vspace{-2mm} \hspace{-7.5mm} \hrule \par}
 
 \maketitle % Print the title
 
@@ -54,117 +65,481 @@
 %	ABSTRACT
 %----------------------------------------------------------------------------------------
 
-\lettrineabstract{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce maximus nisi ligula. Morbi laoreet ex ligula, vitae lobortis purus mattis vel. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec ac metus ut turpis mollis placerat et nec enim. Duis tristique nibh maximus faucibus facilisis. Praesent in consequat leo. Maecenas condimentum ex rhoncus, elementum diam vel, malesuada ante.}
+\lettrineabstract{
+	A recommender system is an Information Retrieval technology that improves access and proactively 
+	recommends relevant items to users by considering the users’ explicitly mentioned preferences and 
+	objective behaviors. A recommender system is one of the major techniques that handle information overload 
+	problem of Information Retrieval by suggesting users with appropriate and relevant items. Today, 
+	several recommender systems have been developed for different domains however, these are not precise 
+	enough to fulfil the information needs of users. Therefore, it is necessary to build high quality recommender 
+	systems. In designing such recommenders, designers face several issues and challenges that need 
+	proper attention. This paper investigates and reports the current trends, issues, challenges, and research 
+	opportunities in developing high-quality recommender systems. If properly followed, these issues and challenges 
+	will introduce new research avenues and the goal towards fine-tuned and high-quality 
+	recommender systems can be achieved.
+}
 
 %----------------------------------------------------------------------------------------
 %	ARTICLE CONTENTS
 %----------------------------------------------------------------------------------------
 
-\section{Section}
+\section{Introduccion}
 
-This sentence requires citation \citep{Reference1}. This sentence requires multiple citations to imply that it is better supported \citep{Reference2,Reference3}. Finally, when conducting an appeal to authority, it can be useful to cite a reference in-text, much like \cite{Reference1} do quite a bit. Oh, and make sure to check out the bear in Figure \ref{bear}.
+Los sistemas de recomendaciones son herramientas que generan recomendaciones sobre un determinado objeto de estudio, 
+a partir de las preferencias y opiniones dadas por los usuarios. El uso de estos sistemas se está poniendo cada vez más de
+moda en Internet debido a que son muy útiles para evaluar y filtrar la gran cantidad de información disponible en la
+Web con objeto de asistir a los usuarios en sus procesos de búsqueda y recuperación de información. 
+En este trabajo realizaremos una revisión de las características y aspectos fundamentales relacionados con el diseño, 
+implementación y estructura de los sistemas de recomendaciones analizando distintas propuestas que han ido apareciendo 
+en la literatura al respecto.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce maximus nisi ligula. Morbi laoreet ex ligula, vitae lobortis purus mattis vel. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec ac metus ut turpis mollis placerat et nec enim. Duis tristique nibh maximus faucibus facilisis. Praesent in consequat leo. Maecenas condimentum ex rhoncus, elementum diam vel, malesuada ante. Fusce pulvinar, mauris pretium placerat venenatis, lectus ex tempus lacus, id suscipit libero lorem eu augue. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+\section{Collaborative Filtering}
 
-Aliquam elementum nulla at arcu finibus aliquet. Praesent congue ultrices nisl pretium posuere. Nunc vel nulla hendrerit, ultrices justo ut, ultrices sapien. Duis ut arcu at nunc pellentesque consectetur. Vestibulum eget nisl porta, ultricies orci eget, efficitur tellus. Maecenas rhoncus purus vel mauris tincidunt, et euismod nibh viverra. Mauris ultrices tellus quis ante lobortis gravida. Duis vulputate viverra erat, eu sollicitudin dui. Proin a iaculis massa. Nam at turpis in sem malesuada rhoncus. Aenean tempor risus dui, et ultrices nulla rutrum ut. Nam commodo fermentum purus, eget mattis odio fringilla at. Etiam congue et ipsum sed feugiat. Morbi euismod ut purus et tempus. Etiam est ligula, aliquam eget porttitor ut, auctor in risus. Curabitur at urna id dui lobortis pellentesque.
+El Filtrado colaborativo (FC) es una técnica utilizada por algunos sistemas recomendadores. En general,
+el filtrado colaborativo es el proceso de filtrado de información o modelos, que usa técnicas que implican 
+la colaboración entre múltiples agentes, fuentes de datos, etc. \cite{two} Las aplicaciones del filtrado colaborativo 
+suelen incluir conjuntos de datos muy grandes. Los métodos de filtrado colaborativo se han aplicado a muchos 
+tipos de datos, incluyendo la detección y control de datos (como en la exploración mineral, sensores 
+ambientales en áreas grandes o sensores múltiples, datos financieros) tales como instituciones de 
+servicios financieros que integran diversas fuentes financieras, o en formato de comercio electrónico y 
+aplicaciones web 2.0 donde el foco está en los datos del usuario, etc. Esta discusión se centra en el 
+filtrado colaborativo para datos de usuario, aunque algunos de los métodos y enfoques pueden 
+aplicarse a otras aplicaciones.
 
-\begin{align}
-	A = 
-	\begin{bmatrix}
-		A_{11} & A_{21} \\
-		A_{21} & A_{22}
-	\end{bmatrix}
-\end{align}
+$\newline$
 
-Donec nec nibh sagittis, finibus mauris quis, laoreet augue. Maecenas aliquam sem nunc, vel semper urna hendrerit nec. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas pellentesque dolor lacus, sit amet pretium felis vestibulum finibus. Duis tincidunt sapien faucibus nisi vehicula tincidunt. Donec euismod suscipit ligula a tempor. Aenean a nulla sit amet magna ullamcorper condimentum. Fusce eu velit vitae libero varius condimentum at sed dui.
+En el enfoque más reciente, el filtrado colaborativo es un método para hacer predicciones automáticas (filtrado) 
+sobre los intereses de un usuario mediante la recopilación de las preferencias o gustos de información de muchos 
+usuarios (colaborador). El Filtrado colaborativo se basa, en que si una persona A tiene la misma opinión que una 
+persona B sobre un tema, A es más probable que tenga la misma opinión que B en otro tema diferente que la 
+opinión que tendría una persona elegida azar. Por ejemplo, un sistema de recomendación basado en el 
+filtrado colaborativo para televisión podría hacer predicciones acerca de los programas que le gustarían a un 
+usuario a partir de una lista parcial de los gustos de ese usuario (gustos o disgustos). Notese que estas 
+predicciones son específicas para el usuario, pero utilizan la información obtenida de muchos usuarios. 
+Esto difiere del enfoque más simple de otorgarle una puntuación promedio (poco específico) para cada elemento de interés, 
+por ejemplo sobre la base de su número de votos.
 
-In non leo tincidunt, tristique orci eu, suscipit ex. Fusce non lectus ut dolor tincidunt fermentum. Donec dictum mauris magna, ut dictum nisl finibus quis. Nulla elementum ipsum ut lectus sodales finibus. Nulla ac malesuada magna. Etiam arcu dolor, luctus eget elit a, volutpat vulputate mi. Donec elementum tellus libero, ut ornare orci dignissim lacinia. Nullam iaculis vehicula sem, at tempor tellus. Praesent eu nisi a elit viverra lobortis. Nullam eu metus et justo molestie posuere vitae imperdiet erat. Praesent at gravida dui. Vivamus mauris odio, efficitur eget lacus quis, mattis tristique risus. Mauris quis metus sed risus lobortis sollicitudin vitae vitae quam. Morbi leo turpis, aliquam at nunc sit amet, ultricies dictum lorem. Nam et fringilla elit. Vestibulum auctor, turpis ut facilisis tempor, arcu nibh tincidunt libero, quis blandit leo turpis a urna.
+\subsection{Índice Jaccard}
+
+El índice de Jaccard ( IJ ) o coeficiente de Jaccard ( IJ ) mide el grado de similitud entre dos conjuntos, sea cual sea el tipo de elementos.
+$\newline$
+La formulación es la siguiente:
+$\newline$
+J(A,B) = |A ${\cap}$ B| / |A ${\cup}$ B|
+
+$\newline$
+Es decir, la cardinalidad de la intersección de ambos conjuntos dividida por la cardinalidad de su unión.
+Siempre toma valores entre 0 y 1, correspondiente este último a la igualdad total entre ambos conjuntos.
+En ecología se usa para medir la similitud, disimilitud o distancias que existen entre dos 
+estaciones de muestreo, con una formulación equivalente \cite{one}
+$\newline$
+$\newline$
+Ahora miremos como aplicar esta formula con R, En primer lugar declararemos un dataframe de peliculas con sus rankings 
+$\newline$
+\begin{lstlisting}[language=R]
+
+a <- data.frame(user = "A", HP1 = 4, HP2 = NA, HP3 = NA, 
+                TW=1, SW1 = 1, SW2= NA, SW2 = NA)
+b <- data.frame(user = "B", HP1 = 5, HP2 = 5, HP3 = 4, 
+                TW=NA, SW1 = NA, SW2= NA, SW2 = NA)
+c <- data.frame(user = "C", HP1 = NA, HP2 = NA, HP3 = NA, 
+                TW=2, SW1 = 4, SW2= 5, SW2 = NA)
+d <- data.frame(user = "D", HP1 = NA, HP2 = 3, HP3 = NA, 
+                TW=NA, SW1 = NA, SW2= NA, SW2 = 3)
+
+movies.rating <- rbind(a,b,c,d)
+
+\end{lstlisting}
+$\newline$
+Ahora la funcion que trabaja especificamente con un dataframe definido como el anterior:
+$\newline$
+\begin{lstlisting}[language=R]
+
+Jaccard <- function(data.set, user1, user2){
+  
+  u1 <- subset(data.set, user == user1)
+  u2 <- subset(data.set, user == user2)
+  
+  u1 <- u1[, !(names(u1) %in% c("user"))]
+  u2 <- u2[, !(names(u2) %in% c("user"))]
+  
+  union_ <- 0
+  intersect_ <- 0
+  
+  for(name_ in names(u1)){
+    
+    if( !is.na(u1[,name_]) & !is.na(u2[,name_])){
+      intersect_ <- intersect_ + 1
+    }
+    
+    if( !is.na(u1[,name_]) | !is.na(u2[,name_])){
+      union_ <- union_ + 1
+    }
+    
+  }
+  
+  intersect_/union_
+  
+}
+\end{lstlisting}
+
+$\newline$
+
+Ahora cuando probamos la similitud de A con B y A con C obtendriamos los siguientes resultados: 
+
+$\newline$
+
+$\includegraphics[width=3in]{jaccard.png}$
+
+\subsection{Basado en memoria}
+
+Este mecanismo utiliza los datos de las evaluaciones de los usuarios para calcular la similitud entre los usuarios o 
+elementos. Esto se utiliza para hacer recomendaciones. Este fue de los primeros mecanismos y se usa en muchos 
+sistemas comerciales. Es fácil de implementar y es eficaz. Ejemplos típicos de este mecanismo son los FC basados en el 
+vecino más cercano y recomendaciones de los N-primeros basadas en elementos o usuarios.\cite{memory} Por ejemplo, 
+en los enfoques basados en el usuario, el valor de la evaluación del usuario u con respecto al elemento 
+i se calcula como una agregación de las evaluaciones de usuarios similares para el elemento:
+$\newline$
+${\displaystyle r_{u,i}=agrr_{u^{\prime }\in U}r_{u^{\prime },i}}$
+$\newline$
+Donde U denota el conjunto de los mejores N usuarios que son más similares al usuario u con respecto a i. Algunos ejemplos de la función de agregación incluye:
+$\newline$
+$\newline$
+${\displaystyle r_{u,i}={\frac {1}{N}}\sum \limits _{u^{\prime }\in U}r_{u^{\prime },i}}$
+$\newline$
+${\displaystyle r_{u,i}=k\sum \limits _{u^{\prime }\in U}sim(u,u^{\prime })r_{u^{\prime },i}}$
+$\newline$
+${\displaystyle r_{u,i}={\bar {r_{u}}}+k\sum \limits _{u^{\prime }\in U}sim(u,u^{\prime })(r_{u^{\prime },i}-{\bar {r_{u^{\prime }}}})}$
+$\newline$
+$\newline$
+
+Donde k es un factor de normalización se define como
+ ${\displaystyle k=1/\sum _{u^{\prime }\in U}|sim(u,u^{\prime })|}$
+y ${\displaystyle {\bar {r_{u}}}}$ es el promedio de las evaluaciones del usuario u para todos los elementos que ha evaluado.
+$\newline$
+$\newline$
+El algoritmo basado en vecindad calcula la similitud entre dos usuarios o elementos, produce una predicción para el usuario 
+tomando el promedio ponderado de todas las evaluaciones. Calcular la similitud entre los elementos o usuarios es una parte
+ importante de este enfoque. Múltiples mecanismos tales como la correlación de Pearson y la similitud basada 
+ en el coseno entre vectores sirven para esto. La similitud de correlación de Pearson de dos usuarios x, y se define como
+
+${\displaystyle sim(x,y)={\frac {\sum \limits _{i\in I_{xy}}(r_{x,i}-{\bar {r_{x}}})(r_{y,i}-{\bar {r_{y}}})}{\sqrt {\sum \limits _{i\in I_{xy}}(r_{x,i}-{\bar {r_{x}}})^{2}\sum \limits _{i\in I_{xy}}(r_{y,i}-{\bar {r_{y}}})^{2}}}}}$
+
+donde Ixy es el conjunto de elementos evaluados por ambos usuarios. El enfoque basado en coseno define la similitud entre dos usuarios x e y como:
+
+${\displaystyle \operatorname {sim} (x,y)=\cos({\vec {x}},{\vec {y}})={\frac {{\vec {x}}\cdot {\vec {y}}}{||{\vec {x}}||\times ||{\vec {y}}||}}={\frac {\sum \limits _{i\in I_{xy}}r_{x,i}r_{y,i}}{{\sqrt {\sum \limits _{i\in I_{x}}r_{x,i}^{2}}}{\sqrt {\sum \limits _{i\in I_{y}}r_{y,i}^{2}}}}}}$
+
+El algoritmo de recomendación basado en los N-primeros usuarios identifica los k más similares al usuarios actual usando 
+el modelo de similitud basado en vectores. Después de que los k usuarios más similares se encuentran, 
+sus correspondientes matrices de usuario- elementos se agregan para identificar el conjunto de elementos que se 
+recomiendan. Un método popular para encontrar a los usuarios similares es el, que implementa el en tiempo lineal. 
+Las ventajas de este enfoque incluyen: la interpretación de los resultados, lo cual es un aspecto importante 
+de los sistemas de recomendación, es fácil de crear y utilizar; los nuevos datos se pueden agregar fácilmente y 
+de forma incremental, no es necesario considerar el contenido de los elementos que se recomiendan, y mecanismo escala 
+adecuadamente con elementos reevaluados. Hay varias desventajas con este enfoque. En primer lugar, depende de las
+puntuaciones de las personas. En segundo lugar, su rendimiento disminuye cuando los datos son dispersos, lo cual 
+es frecuente en elementos relacionados con la web. Esto evita la escalabilidad de este enfoque y tiene problemas 
+con grandes conjuntos de datos. A pesar de que puede manejar eficientemente los nuevos usuarios porque cuenta 
+con una estructura de datos, añadiendo nuevos elementos se hace más complicada, ya que la representación 
+general se basa en un espacio vectorial específico. Para ello sería necesario incluir el nuevo elemento y 
+volver a insertar todos los elementos de la estructura.
+$\newline$
+Para hacer experimentos en R con esto necesitamos de los siguientes paquetes
+$\newline$
+$\newline$
+
+\begin{lstlisting}[language=R]
+
+install.packages("recommenderlab")
+install.packages("recosystem")
+
+\end{lstlisting}
+
+$\newline$
+$\newline$
+Para probar el codigo
+$\newline$
+$\newline$
+
+\begin{lstlisting}[language=R]
+
+library(recommenderlab)
+library(recosystem)
+
+
+#Building model
+model <- Recommender(real_ratings, method = "IBCF", 
+                     param=list(normalize = "center", 
+					 method="Cosine", k=350))
+
+
+#Making predictions 
+prediction <- predict(model, real_ratings[1:5], type="ratings")
+as(prediction, "matrix")[,1:8]
+
+\end{lstlisting}
+$\newline$
+$\newline$
+Y como resultado 
+$\newline$
+$\newline$
+
+\begin{lstlisting}[language=R]
+ m1       m2       m3       m4       m5       m6       m7      m8
+u1       NA       NA 4.000000       NA       NA 4.400783       NA 3.73582
+u2 4.264205 3.185612 3.172429 3.202051 3.581299 4.014510 3.253853 3.00000
+u3 4.034784 3.794960 4.475967       NA 3.477293 4.171651 4.000000 5.00000
+u4 4.319038       NA       NA       NA       NA 4.318060       NA      NA
+u5 3.561104 1.783488 1.000000 2.638740 1.524747       NA 2.851991 3.00000
+\end{lstlisting}
+%------------------------------------------------
+
+
+\section{Reducción de Dimensiones}
+
+Para conjuntos de datos de alta dimensión (es decir, con número de dimensiones más de 10), reducción de la dimensión 
+se realiza generalmente antes de la aplicación de un K-vecinos más cercanos (k-NN) con el fin de evitar los 
+efectos de la maldición de la dimensionalidad. \cite{dimm}
+$\newline$
+Extracción de características y la reducción de la dimensión se puede combinar en un solo paso utilizando 
+análisis de componentes principales (PCA), análisis discriminante lineal (LDA), o análisis de la correlación 
+canónica (CCA) técnicas como un paso pre-procesamiento seguido por la agrupación de K-NN en vectores de 
+características en el espacio reducido dimensión. En aprendizaje automático este proceso de pocas dimensiones 
+también se llama incrustar.
+
+$\newline$
+
+Para conjuntos de datos muy altas dimensiones (por ejemplo, cuando se realiza la búsqueda de similitud de 
+secuencias de vídeo en vivo, datos de ADN o de alta dimensión Series de tiempo) ejecutar un rápido 'aproximada' 
+Búsqueda K-NN usando hash sensibles de localidad, "proyecciones aleatorias", "bocetos" u otras técnicas de búsqueda 
+de similitud de alta dimensión de la VLDB caja de herramientas podría ser la única opción viable.
+
+$\newline$$\newline$
+
+Para Entrar a nuestra tecnica aplicada SVD es importante tenes claro los siguientes conceptos:
+
+\subsection{Rango de una matriz}
+
+El rango de una matriz es el número máximo de columnas (filas respectivamente) que son linealmente independientes. 
+El rango fila y el rango columna siempre son iguales: este número es llamado simplemente rango de A 
+(prueba más abajo). Comúnmente se expresa como rg(A).
+$\newline$
+El número de columnas independientes de una matriz A de m filas y n columnas es igual a la dimensión del 
+espacio columna de A. También la dimensión del espacio fila determina el rango. El rango de A será, 
+por tanto, un número no negativo, menor o igual que el mínimo entre m y n:
+
+$\newline$
+
+$\mathbb{A} \in M_{mxn} \to 0 \le rang(\mathbb{A}) \le min(m,n)$
 
 %------------------------------------------------
 
-\subsection{Subsection}
+\subsection{Eigen valores y  eigen espacios}
 
-Nam ante risus, tempor nec lacus ac, congue pretium dui. Donec a nisl est. Integer accumsan mauris eu ex venenatis mollis. Aliquam sit amet ipsum laoreet, mollis sem sit amet, pellentesque quam. Aenean auctor diam eget erat venenatis laoreet. In ipsum felis, tristique eu efficitur at, maximus ac urna. Aenean pulvinar eu lorem eget suscipit. Aliquam et lorem erat. Nam fringilla ante risus, eget convallis nunc pellentesque non. Donec ipsum nisl, consectetur in magna eu, hendrerit pulvinar orci. Mauris porta convallis neque, non viverra urna pulvinar ac. Cras non condimentum lectus. Aliquam odio leo, aliquet vitae tellus nec, imperdiet lacinia turpis. Nam ac lectus imperdiet, luctus nibh a, feugiat urna.
+Formalmente, se definen los vectores propios y valores propios de la siguiente manera: Sea $A: V \to V$ n operador lineal en un cierto ${\displaystyle \scriptstyle} \scriptstyle {\mathbb  {K}}$-espacio vectorial V y v un vector no nulo en V. Si existe un escalar c tal que
 
-\begin{itemize}
-	\item First item in a list 
-	\item Second item in a list 
-	\item Third item in a list
-\end{itemize}
+$\newline$
 
-Nunc egestas quis leo sed efficitur. Donec placerat, dui vel bibendum bibendum, tortor ligula auctor elit, aliquet pulvinar leo ante nec tellus. Praesent at vulputate libero, sit amet elementum magna. Pellentesque sodales odio eu ex interdum molestie. Suspendisse lacinia, augue quis interdum posuere, dolor ipsum euismod turpis, sed viverra nibh velit eget dolor. Curabitur consectetur tempus lacus, sit amet luctus mauris interdum vel. Curabitur vehicula convallis felis, eget mattis justo rhoncus eget. Pellentesque et semper lectus.
+${\displaystyle \mathbf {A} \mathbf {v} =c\mathbf {v} ,\qquad \mathbf {v} \neq \mathbf {0} ,c\in \mathbb {K} ,}$
 
-\begin{description}
-	\item[First] This is the first item
-	\item[Last] This is the last item
-\end{description}
+$\newline$
 
-Donec nec nibh sagittis, finibus mauris quis, laoreet augue. Maecenas aliquam sem nunc, vel semper urna hendrerit nec. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas pellentesque dolor lacus, sit amet pretium felis vestibulum finibus. Duis tincidunt sapien faucibus nisi vehicula tincidunt. Donec euismod suscipit ligula a tempor. Aenean a nulla sit amet magna ullamcorper condimentum. Fusce eu velit vitae libero varius condimentum at sed dui.
+entonces decimos que v es un vector propio del operador A, y su valor propio asociado es c. Observe que si v es un vector propio con el valor propio c 
+entonces cualquier múltiplo diferente de cero de v es también un vector propio con el valor propio c. De hecho, todos los vectores propios 
+con el valor propio asociado c junto con 0, forman un subespacio de V, el espacio propio para el valor propio c. 
+Observe además que un espacio propio Z es un subespacio invariante de A, es decir dado w un vector en Z, el vector Aw también pertenece a Z.
 
 %------------------------------------------------
 
-\subsection{Subsection}
+\subsection{Proceso de ortogonalización de Gram-Schmidt}
 
-In hac habitasse platea dictumst. Etiam ac tortor fermentum, ultrices libero gravida, blandit metus. Vivamus sed convallis felis. Cras vel tortor sollicitudin, vestibulum nisi at, pretium justo. Curabitur placerat elit nunc, sed luctus ipsum auctor a. Nulla feugiat quam venenatis nulla imperdiet vulputate non faucibus lorem. Curabitur mollis diam non leo ullamcorper lacinia.
+El método de Gram-Schmidt se usa para hallar bases ortogonales (Espacio Euclideo no normalizado) de cualquier base no euclídea.
+En primer lugar tenemos que:
 
-Morbi iaculis posuere arcu, ut scelerisque sem. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris placerat urna id enim aliquet, non consequat leo imperdiet. Phasellus at nibh ut tortor hendrerit accumsan. Phasellus sollicitudin luctus sapien, feugiat facilisis risus consectetur eleifend. In quis luctus turpis. Nulla sed tellus libero. Pellentesque metus tortor, convallis at tellus quis, accumsan faucibus nulla. Fusce auctor eleifend volutpat. Maecenas vel faucibus enim. Donec venenatis congue congue. Integer sit amet quam ac est aliquam aliquet. Ut commodo justo sit amet convallis scelerisque.
+${\displaystyle \mathbf {v} -{\langle \mathbf {v} ,\mathbf {u} \rangle  \over \langle \mathbf {u} ,\mathbf {u} \rangle }\mathbf {u} =\mathbf {v} -\mathrm {proy} _{\mathbf {u} }\,(\mathbf {v} )}$
 
-\begin{enumerate}
-	\item First numbered item in a list
-	\item Second numbered item in a list
-	\item Third numbered item in a list
-\end{enumerate}
+Es un vector ortogonal a ${\displaystyle \mathbf {u} }$ . Entonces, dados los vectores ${\displaystyle \mathbf {v} _{1},\dots ,\mathbf {v} _{n}}$  , se define:
 
-Aliquam elementum nulla at arcu finibus aliquet. Praesent congue ultrices nisl pretium posuere. Nunc vel nulla hendrerit, ultrices justo ut, ultrices sapien. Duis ut arcu at nunc pellentesque consectetur. Vestibulum eget nisl porta, ultricies orci eget, efficitur tellus. Maecenas rhoncus purus vel mauris tincidunt, et euismod nibh viverra. Mauris ultrices tellus quis ante lobortis gravida. Duis vulputate viverra erat, eu sollicitudin dui. Proin a iaculis massa. Nam at turpis in sem malesuada rhoncus. Aenean tempor risus dui, et ultrices nulla rutrum ut. Nam commodo fermentum purus, eget mattis odio fringilla at. Etiam congue et ipsum sed feugiat. Morbi euismod ut purus et tempus. Etiam est ligula, aliquam eget porttitor ut, auctor in risus. Curabitur at urna id dui lobortis pellentesque.
+${\displaystyle \mathbf {u} _{1}=\mathbf {v} _{1},}$
 
-\begin{table}
-	\caption{Example table}
-	\centering
-	\begin{tabular}{llr}
-		\toprule
-		\multicolumn{2}{c}{Name} \\
-		\cmidrule(r){1-2}
-		First Name & Last Name & Grade \\
-		\midrule
-		John & Doe & $7.5$ \\
-		Richard & Miles & $5$ \\
-		\bottomrule
-	\end{tabular}
-\end{table}
+${\displaystyle \mathbf {u} _{2}=\mathbf {v} _{2}-{\langle \mathbf {v} _{2},\mathbf {u} _{1}\rangle \over \langle \mathbf {u} _{1},\mathbf {u} _{1}\rangle }\mathbf {u} _{1},}$
+
+${\displaystyle \mathbf {u} _{3}=\mathbf {v} _{3}-{\langle \mathbf {v} _{3},\mathbf {u} _{1}\rangle \over \langle \mathbf {u} _{1},\mathbf {u} _{1}\rangle }\mathbf {u} _{1}-{\langle \mathbf {v} _{3},\mathbf {u} _{2}\rangle \over \langle \mathbf {u} _{2},\mathbf {u} _{2}\rangle }\mathbf {u} _{2},}$
+
+Generalizando en k:
+
+${\displaystyle \mathbf {u} _{k}=\mathbf {v} _{k}-\sum _{j=1}^{k-1}{\langle \mathbf {v} _{k},\mathbf {u} _{j}\rangle \over \langle \mathbf {u} _{j},\mathbf {u} _{j}\rangle }\mathbf {u} _{j}} {\displaystyle \mathbf {u} _{k}=\mathbf {v} _{k}-\sum _{j=1}^{k-1}{\langle \mathbf {v} _{k},\mathbf {u} _{j}\rangle  \over \langle \mathbf {u} _{j},\mathbf {u} _{j}\rangle }\mathbf {u} _{j}}$
 
 %------------------------------------------------
 
-\section{Section}
+\subsection{Descomposición en valores singulares}
 
-\begin{figure}
-	\includegraphics[width=\linewidth]{bear.jpg} % Figure image
-	\caption{A majestic grizzly bear} % Figure caption
-	\label{bear} % Label for referencing with \ref{bear}
-\end{figure}
+En álgebra lineal, la descomposición en valores singulares de una matriz real o compleja es una factorización de 
+la misma con muchas aplicaciones en estadística y otras disciplinas.
 
-In hac habitasse platea dictumst. Vivamus eu finibus leo. Donec malesuada dui non sagittis auctor. Aenean condimentum eros metus. Nunc tempus id velit ut tempus. Quisque fermentum, nisl sit amet consectetur ornare, nunc leo luctus leo, vitae mattis odio augue id libero. Mauris quis lectus at ante scelerisque sollicitudin in eu nisi. Nulla elit lacus, ultricies eu erat congue, venenatis semper turpis. Ut nec venenatis velit. Mauris lacinia diam diam, ac egestas neque sodales sed. Curabitur eu diam nulla. Duis nec turpis finibus, commodo diam sed, bibendum erat. Nunc in velit ullamcorper, posuere libero a, mollis mauris. Nulla vehicula quam id tortor ornare blandit. Aenean maximus tempor orci ultrices placerat. Aenean condimentum magna vulputate erat mattis feugiat.
+Dada una matriz real ${\displaystyle A\in \Re ^{m\times n}}$, los autovalores de la matriz cuadrada, 
+simétrica y semidefinida positiva ${\displaystyle A^{T}A\in \Re ^{n\times n}}$ son siempre reales y mayores o iguales a cero. 
+Teniendo en cuenta el producto interno canónico vemos que:
 
-Quisque lacinia, purus id mattis gravida, sem enim fringilla erat, non dapibus est tellus pellentesque velit. Vivamus pretium sem quis leo placerat, at dignissim ex iaculis. Donec neque tortor, pharetra quis vestibulum id, tempus scelerisque mi. Cras in mattis est. Integer nec lorem rutrum, semper ligula bibendum, iaculis neque. Sed in nunc placerat, viverra dui in, fringilla sem. Sed quis rutrum magna, vitae pellentesque eros.
+$\newline$
 
-Praesent maximus mauris vitae nisl pulvinar, at tristique tortor aliquam. Etiam sit amet nunc in nulla vulputate sollicitudin. Aliquam erat volutpat. Praesent pharetra gravida cursus. Quisque vulputate lacus nunc. Integer orci ex, porttitor quis sapien id, eleifend gravida mi. Etiam efficitur justo eget nulla congue mattis. Duis commodo vel arcu a pretium. Aenean eleifend viverra nisl, nec ornare lacus rutrum in.
+${\displaystyle \left(A^{T}A\right)^{T}=A^{T}\left(A^{T}\right)^{T}=A^{T}A}$. O sea que es simétrica
+$\newline$
+${\displaystyle (Ax,Ax)=x^{T}A^{T}Ax=||Ax||^{2}\geq 0}$ es decir ${\displaystyle A^{T}A\,}$ es semidefinida positiva, 
+es decir, todos sus autovalores son mayores o iguales a cero.
+$\newline$
 
-Vivamus pulvinar ac eros eu pellentesque. Duis nibh felis, sagittis sed lacus at, sagittis mattis nisi. Fusce ante dui, tincidunt in scelerisque ut, sagittis at magna. Fusce tincidunt felis et odio tincidunt imperdiet. Cras ut facilisis nisl. Aliquam vitae consequat metus, eget gravida augue. In imperdiet justo quis nulla venenatis accumsan. Aliquam aliquet consectetur tortor, at sollicitudin sapien porta sed. Donec efficitur mauris id rhoncus volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed bibendum purus dapibus tincidunt euismod. Nullam malesuada ultrices lacus, ut tincidunt dolor. Etiam imperdiet quam eget elit tincidunt scelerisque. Curabitur ut ullamcorper dui. Cras gravida porta leo, ut lobortis nisl venenatis pulvinar. Proin non semper nulla.
+Si ${\displaystyle \lambda _{i}\,}$  es el i-ésimo autovalor asociado al i-ésimo autovector, 
+entonces ${\displaystyle \lambda _{i}\in \Re }$. Esto es una propiedad de las matrices simétricas.
 
-Praesent pretium nisl purus, id mollis nibh efficitur sed. Sed sit amet urna leo. Nulla sed imperdiet sem. Donec ut diam tristique, faucibus ligula vel, varius est. In ipsum ligula, elementum vitae velit ac, viverra tincidunt enim. Phasellus gravida diam id nisl interdum maximus. Ut semper, tortor vitae congue pharetra, justo odio commodo urna, vel tempus libero ex et risus. Vivamus commodo felis non venenatis rutrum. Sed pulvinar scelerisque augue in porta. Sed maximus libero nec tellus malesuada elementum. Proin non augue posuere, pellentesque felis viverra, varius urna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dignissim urna eget diam dictum, eget facilisis libero pulvinar.
 
-Aliquam ex tellus, hendrerit sed odio sit amet, facilisis elementum enim. Suspendisse potenti. Integer molestie ac augue sit amet fermentum. Vivamus ultrices ante nulla, vitae venenatis ipsum ullamcorper sed. Phasellus gravida felis sapien, ac porta purus pharetra quis. Sed eget augue tellus. Nam vitae hendrerit arcu, id iaculis ipsum. Pellentesque sed magna tortor.
+%------------------------------------------------
 
-In ac tempus diam. Sed nec lobortis massa, suscipit accumsan justo. Quisque porttitor, ligula a semper euismod, urna diam dictum sem, sed maximus risus purus sit amet felis. Fusce elementum maximus nisi a mattis. Nulla vitae elit erat. Integer sit amet commodo risus, eget elementum nulla. Donec ultricies erat sit amet sem commodo iaculis. Donec euismod volutpat lacus, ut tempor est lacinia a. Vivamus auctor condimentum tincidunt. Praesent sed finibus urna. Sed pellentesque blandit magna et rhoncus.
+\subsection{SVD con R}
 
-Integer vel turpis nec tellus sodales malesuada a vel odio. Fusce et lectus eu nibh rhoncus tempus vel nec elit. Suspendisse commodo orci velit, lacinia dictum odio accumsan et. Vivamus libero dui, elementum vel nibh non, fermentum venenatis risus. Aliquam sed sapien ac orci sodales tempus a eget dui. Morbi non dictum tortor, quis tincidunt nibh. Proin ut tincidunt odio.
+\begin{lstlisting}[language=R]
 
-Pellentesque ac nisi dolor. Pellentesque maximus est arcu, eu scelerisque est rutrum vitae. Mauris ullamcorper vulputate vehicula. Praesent fermentum leo ac velit accumsan consectetur. Aliquam eleifend ex eros, ut lacinia tellus volutpat non. Pellentesque sit amet cursus diam. Maecenas elementum mattis est, in tincidunt ex pretium ac. Integer ultrices nunc rutrum, pretium sapien vitae, lobortis velit.
+A = as.matrix(data.frame(c(4,7,-1,8), c(-5,-2,4,2), c(-1,3,-3,6)))
+A
+
+     c.4..7...1..8. c..5...2..4..2. c..1..3...3..6.
+[1,]              4              -5              -1
+[2,]              7              -2               3
+[3,]             -1               4              -3
+[4,]              8               2               6
+
+\end{lstlisting}
+
+Ahora para aplicar SVD podemos usar la funcion incluida en R
+
+\begin{lstlisting}[language=R]
+A.svd <- svd(A)
+A.svd
+
+d
+[1] 13.161210  6.999892  3.432793
+
+u
+           [,1]       [,2]        [,3]
+[1,] -0.2816569  0.7303849 -0.42412326
+[2,] -0.5912537  0.1463017 -0.18371213
+[3,]  0.2247823 -0.4040717 -0.88586638
+[4,] -0.7214994 -0.5309048  0.04012567
+
+v
+
+           [,1]        [,2]       [,3]
+[1,] -0.8557101  0.01464091 -0.5172483
+[2,]  0.1555269 -0.94610374 -0.2840759
+[3,] -0.4935297 -0.32353262  0.8073135
+
+\end{lstlisting}
+
+
+\subsection{SVD con R, paso a paso}
+
+\begin{lstlisting}[language=R]
+ATA <- t(A) %*% A
+ATA
+
+##                 c.4..7...1..8. c..5...2..4..2. c..1..3...3..6.
+## c.4..7...1..8.             130             -22              68
+## c..5...2..4..2.            -22              49              -1
+## c..1..3...3..6.             68              -1              55
+
+ATA.e <- eigen(ATA)
+v.mat <- ATA.e$vectors
+v.mat
+
+##            [,1]        [,2]       [,3]
+## [1,]  0.8557101 -0.01464091 -0.5172483
+## [2,] -0.1555269  0.94610374 -0.2840759
+## [3,]  0.4935297  0.32353262  0.8073135
+
+v.mat[,1:2] <- v.mat[,1:2] * -1
+v.mat
+
+##            [,1]        [,2]       [,3]
+## [1,] -0.8557101  0.01464091 -0.5172483
+## [2,]  0.1555269 -0.94610374 -0.2840759
+## [3,] -0.4935297 -0.32353262  0.8073135
+
+AAT <- A %*% t(A)
+AAT
+
+##      [,1] [,2] [,3] [,4]
+## [1,]   42   35  -21   16
+## [2,]   35   62  -24   70
+## [3,]  -21  -24   26  -18
+## [4,]   16   70  -18  104
+
+AAT.e <- eigen(AAT)
+u.mat <- AAT.e$vectors
+u.mat
+
+##            [,1]       [,2]        [,3]       [,4]
+## [1,] -0.2816569  0.7303849 -0.42412326 -0.4553316
+## [2,] -0.5912537  0.1463017 -0.18371213  0.7715340
+## [3,]  0.2247823 -0.4040717 -0.88586638  0.0379443
+## [4,] -0.7214994 -0.5309048  0.04012567 -0.4426835
+
+u.mat <- u.mat[,1:3]
+r <- sqrt(ATA.e$values)
+r <- r * diag(length(r))[,1:3]
+r
+
+##          [,1]     [,2]     [,3]
+## [1,] 13.16121 0.000000 0.000000
+## [2,]  0.00000 6.999892 0.000000
+## [3,]  0.00000 0.000000 3.432793
+
+svd.matrix <- u.mat %*% r %*% t(v.mat)
+svd.matrix
+
+##      [,1] [,2] [,3]
+## [1,]    4   -5   -1
+## [2,]    7   -2    3
+## [3,]   -1    4   -3
+## [4,]    8    2    6
+\end{lstlisting}
+
+
+\medskip
+\newpage
+
+\section{Conclusión}
+
+La cantidad de algoritmos para construir sistemas de recomendacion son incontables, hoy en dia con el constante crecimiento de Internet
+y con las distintas necesidades para retener los usuarios, los recommendation engines deben de ser mas precisos hasta el punto de 
+dar la experiencia de personalizacion por usuario. tener este tipo de paradigmas hace que el costo computacional sea elevado en el 
+caso de querer implementar tecnicas en base a filtros colaborativos, por lo que para datasets pequeños se recomienda su uso. lo bueno
+de este tipo de tecnicas es que su interpretabilidad es mas rapida. para el caso de datasets muy grandes se recomiendan tecnicas que involucran 
+reduccion de dimensiones como el caso de Descomposicion Espectral, SVD o ACP. Estos por su tecnica son mas rapidos de procesar
+pero mas dificiles de interpretar. 
+
+\newpage
 
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY
 %----------------------------------------------------------------------------------------
 
+\begin{thebibliography}{9}
+
+
 \printbibliography[title={Bibliography}] % Print the bibliography, section title in curly brackets
+\bibitem{one}
+Real, R., Vargas, J. M. (1996). The probabilistic basis of Jaccards index of similarity. Systematic biology, 45(3), 380-385
+
+\bibitem{two}
+Terveen, Loren; Hill, Will (2001). Beyond Recommender Systems: Helping People Help Each Other
+
+\bibitem{memory}
+Xiaoyuan Su, Taghi M. Khoshgoftaar, A survey of collaborative filtering techniques, Advances in Artificial Intelligence archive, 2009.
+
+\bibitem{dimm}
+Kevin Beyer, Jonathan Goldstein, Raghu Ramakrishnan, Uri Shaft (1999) "Cuando es" vecino más cercano "significativa? ". Base de datos Teoría-ICDT99 , 217-235
+
+\end{thebibliography}
 
 %----------------------------------------------------------------------------------------
 
